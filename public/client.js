@@ -81,9 +81,14 @@ const socket = io.connect( "https://rock-paper-scissor-six-gamma.vercel.app/", {
 
 const createRoom = () => {
   player1 = true;
-  roomID = Math.random().toString(36);
+  roomID = Math.random().toString(36).substring(2, 10); // shorter & cleaner room ID
   socket.emit("createRoom", roomID);
-  alert(`${roomID}`);
+
+  // Autofill the room ID input so user can copy or share it
+  document.getElementById("room-id").value = roomID;
+
+  // Optional: Display a friendly message
+  console.log(`Room created! Share this code with a friend: ${roomID}`);
 };
 
 const joinRoom = () => {
